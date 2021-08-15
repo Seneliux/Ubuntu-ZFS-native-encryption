@@ -11,7 +11,7 @@ sgdisk -n3:0:+2G -t3:BE00 $DISK
 sgdisk -n4:0:0 -t4:BF00 $DISK
 partprobe
 
-# On both pools adjust ashift, and on SSD add autotrim
+# On both pools adjust ashift, and on SSD add autotrim. ashift for old disks 512B sector =9, 4k=12, 8k=13. Not gold rule, it is performance price for capacity and vice versa.
 # pools creation
 zpool create \
 -o cachefile=/etc/zfs/zpool.cache \
@@ -32,7 +32,7 @@ zpool create \
 -O mountpoint=/boot -R /mnt \
 bpool ${DISK}-part3
 
-# My machine not supporting feature@log_spacemap, so I disabled. With thi system booted read-only
+# My machine not supporting feature@log_spacemap, so I disabled. With thisd system booted read-only
 zpool create \
 -o ashift=9 \
 -o feature@log_spacemap=disabled \

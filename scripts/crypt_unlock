@@ -1,0 +1,24 @@
+#!/bin/sh
+# /usr/share/initramfs-tools/hooks/crypt_unlock.sh
+
+PREREQ="dropbear"
+
+prereqs() {
+  echo "$PREREQ"
+}
+
+
+case "$1" in
+  prereqs)
+    prereqs
+    exit 0
+  ;;
+esac
+
+. "${CONFDIR}/initramfs.conf"
+. /usr/share/initramfs-tools/hook-functions
+
+if [ "${DROPBEAR}" != "n" ] && [ -r "/etc/zfs" ] ; then
+       copy_file script /usr/share/cryptsetup/initramfs/bin/unlock /bin/unlock;
+
+fi

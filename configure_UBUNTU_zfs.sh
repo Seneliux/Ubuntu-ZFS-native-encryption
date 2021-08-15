@@ -62,17 +62,17 @@ zpool export -a
 reboot
 
 # Touble
-If not found rpool (initrd promp), import:
+# If not found rpool (initrd promp), import:
 zpool import -f -R / rpool
 zpool import -f -R / bpool
 exit
 
 
-cryptsetup: ERROR: Couldn't resolve device rpool/ROOT/
-cryptsetup: WARNING: Couldn't determine root device
+#cryptsetup: ERROR: Couldn't resolve device rpool/ROOT/
+# cryptsetup: WARNING: Couldn't determine root device
+# This already fixed in the cryptesetup 2.3.3
 apt install build-essential --no-install-recommends -y
 cd /usr/share/initramfs-tools/hooks/
-wget https://launchpadlibrarian.net/424899870/cryptsetup-initramfs__1830110__cryptroot.patch
-patch -u cryptroot -i cryptsetup-initramfs__1830110__cryptroot.patch
+wget https://raw.githubusercontent.com/Seneliux/Ubuntu-ZFS-native-encryption/master/scripts/patch
+patch -u cryptroot -i patch
 chmod -x cryptroot.orig
-cd /usr/share/cryptsetup/initramfs/bin/

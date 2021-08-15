@@ -1,0 +1,78 @@
+apt update
+netplan generate
+# change your locales, time zone, etc
+echo -e 'de_DE.UTF-8 UTF-8\nen_US.UTF-8 UTF-8' > /etc/locale.gen
+locale-gen
+ln -s /usr/share/zoneinfo/Europe/Berlin /etc/localtime -f
+update-locale LANG=en_US.UTF-8 LANGUAGE=en_US
+
+apt install --yes dosfstools
+mkdosfs -F 32 -s 1 -n EFI ${DISK}-part1
+mkdir /boot/efi
+echo /dev/disk/by-uuid/$(blkid -s UUID -o value ${DISK}-part1) /boot/efi vfat defaults 0 0 >> /etc/fstab
+mount /boot/efi
+
+mkdir /boot/efi/grub /boot/grub
+echo /boot/efi/grub /boot/grub none defaults,bind 0 0 >> /etc/fstab
+mount /boot/grub
+
+apt install --yes grub-pc linux-image-generic zfs-initramfs zsys
+apt remove --purge os-prober -y
+
+cp /usr/share/systemd/tmp.mount /etc/systemd/system/
+systemctl enable tmp.mount
+
+grub-probe /boot
+apt install dropbear-initramfs -y
+#upload RSA autohorized key to /etc/dropbear/authorized_keys
+sed -i "s/#DROPBEAR_OPTIONS=/DROPBEAR_OPTIONS=\"-c \/bin\/cryptroot-unlock -p 4748 -s -j -k -I 60\"/" /etc/dropbear-initramfs/config
+echo 'ssh-rsa AAAAB THERE IS YOUR RSA PUBLIC KEY FOR SYSTEM UNLOCKING VIA SSH' > /etc/dropbear-initramfs/authorized_keys
+chmod 600 /etc/dropbear-initramfs/authorized_keys
+update-initramfs -c -k all
+
+#/etc/default/grub
+# Add init_on_alloc=0 to: GRUB_CMDLINE_LINUX_DEFAULT
+update-grub
+grub-install $DISK
+
+
+mkdir /etc/zfs/zfs-list.cache
+touch /etc/zfs/zfs-list.cache/bpool
+touch /etc/zfs/zfs-list.cache/rpool
+ln -s /usr/lib/zfs-linux/zed.d/history_event-zfs-list-cacher.sh /etc/zfs/zed.d
+# After this wait a little bit
+zed -F &
+
+# Must be not empty
+cat /etc/zfs/zfs-list.cache/bpool
+cat /etc/zfs/zfs-list.cache/rpool
+
+sed -Ei "s|/mnt/?|/|" /etc/zfs/zfs-list.cache/bpool
+sed -Ei "s|/mnt/?|/|" /etc/zfs/zfs-list.cache/rpool
+
+
+passwd -l root # or passwd if have not copet SSH authorized_keys
+#set port, root login permissions, etc:
+nano /etc/ssh/sshd_config
+
+# exit chroot
+mount | grep -v zfs | tac | awk '/\/mnt/ {print $3}' | \
+    xargs -i{} umount -lf {}
+zpool export -a
+reboot
+
+# Touble
+If not found rpool (initrd promp), import:
+zpool import -f -R / rpool
+zpool import -f -R / bpool
+exit
+
+
+cryptsetup: ERROR: Couldn't resolve device rpool/ROOT/
+cryptsetup: WARNING: Couldn't determine root device
+apt install build-essential --no-install-recommends -y
+cd /usr/share/initramfs-tools/hooks/
+wget https://launchpadlibrarian.net/424899870/cryptsetup-initramfs__1830110__cryptroot.patch
+patch -u cryptroot -i cryptsetup-initramfs__1830110__cryptroot.patch
+chmod -x cryptroot.orig
+cd /usr/share/cryptsetup/initramfs/bin/

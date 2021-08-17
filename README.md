@@ -8,8 +8,8 @@ Eaasy to adopt to the EFI system. Consult [OpenZFS How-to](https://openzfs.githu
 Last steps like user creation, etc., please look OpenZFS docs (link is in Source list)
 
 Sources
-[OpenZFS docs](https://openzfs.github.io/openzfs-docs/Getting%20Started/Ubuntu/Ubuntu%2020.04%20Root%20on%20ZFS.html)
-cryptsetup error patch from [launcpad bugs](https://bugs.launchpad.net/debian/+source/cryptsetup/+bug/1830110)
-[Remote unlocking native encrypted ZFS](https://github.com/dynerose/Remote-unlock-native-ZFS)
+[OpenZFS docs](https://openzfs.github.io/openzfs-docs/Getting%20Started/Ubuntu/Ubuntu%2020.04%20Root%20on%20ZFS.html)  
+cryptsetup error patch from [launcpad bugs](https://bugs.launchpad.net/debian/+source/cryptsetup/+bug/1830110)  
+[Remote unlocking native encrypted ZFS](https://github.com/dynerose/Remote-unlock-native-ZFS)  
 
 Later....

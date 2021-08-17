@@ -33,7 +33,8 @@ wget https://raw.githubusercontent.com/Seneliux/Ubuntu-ZFS-native-encryption/mas
 update-initramfs -k all -c
 
 #/etc/default/grub
-# Add init_on_alloc=0 to: GRUB_CMDLINE_LINUX_DEFAULT
+# Add init_on_alloc=0  to: GRUB_CMDLINE_LINUX_DEFAULT. Addtional - to disable ipv6: ipv6.disable=1
+#remove "splash"
 update-grub
 grub-install $DISK
 

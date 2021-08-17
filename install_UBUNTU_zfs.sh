@@ -82,7 +82,7 @@ debootstrap --include nano,openssh-server,wget,ufw focal /mnt http://archive.ubu
 mkdir /mnt/etc/zfs
 cp /etc/zfs/zpool.cache /mnt/etc/zfs/
 
-# comfigure system
+# configure system. Set hostname
 HOSTNAME=
 echo $HOSTNAME > /mnt/etc/hostname
 #remove FQDN from the second line if you have not FQDN

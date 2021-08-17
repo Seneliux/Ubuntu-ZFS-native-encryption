@@ -48,12 +48,13 @@ zfs create -o canmount=off -o mountpoint=none rpool/ROOT
 zfs create -o canmount=off -o mountpoint=none bpool/BOOT
 
 # datasets unique ID. A few symbols. Recommend to add pard of domain name without dots, or computer name
-UUID=domain
+UUID=part_of_domain_name_or_computer-name
 # Create filesystem datasets for the root and boot filesystems:
 zfs create -o mountpoint=/ -o com.ubuntu.zsys:bootfs=yes -o com.ubuntu.zsys:last-used=$(date +%s) rpool/ROOT/$UUID
 zfs create -o mountpoint=/boot bpool/BOOT/$UUID
 
 # Create datasets:
+zfs create -o com.ubuntu.zsys:bootfs=no -o canmount=off rpool/ROOT/seniux/usr
 zfs create -o com.ubuntu.zsys:bootfs=no -o canmount=off rpool/ROOT/$UUID/var
 zfs create rpool/ROOT/$UUID/var/log
 zfs create rpool/ROOT/$UUID/var/snap
@@ -71,6 +72,7 @@ zfs create -o com.ubuntu.zsys:bootfs=no -o mountpoint=/etc/letsencrypt rpool/USE
 zfs create -o com.ubuntu.zsys:bootfs=no -o mountpoint=/etc/nginx rpool/USERDATA/nginx
 zfs create -o mountpoint=/var/vmail rpool/USERDATA/vmail
 zfs create -o mountpoint=/var/www rpool/USERDATA/www
+zfs create -o mountpoint=/usr/local rpool/USERDATA/usr_local
 
 # install system
 mkdir /mnt/run

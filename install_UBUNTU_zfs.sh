@@ -78,7 +78,7 @@ zfs create -o mountpoint=/usr/local rpool/USERDATA/usr_local
 mkdir /mnt/run
 mount -t tmpfs tmpfs /mnt/run
 mkdir /mnt/run/lock
-debootstrap --include nano,openssh-server,wget focal /mnt http://archive.ubuntu.com/ubuntu
+debootstrap --include nano,openssh-server,wget,ufw focal /mnt http://archive.ubuntu.com/ubuntu
 mkdir /mnt/etc/zfs
 cp /etc/zfs/zpool.cache /mnt/etc/zfs/
 

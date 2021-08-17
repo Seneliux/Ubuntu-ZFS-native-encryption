@@ -58,7 +58,8 @@ passwd -l root # or passwd if have not copet SSH authorized_keys
 #set port, root login permissions, etc:
 nano /etc/ssh/sshd_config
 
-# exit chroot
+# First reboot
+exit
 mount | grep -v zfs | tac | awk '/\/mnt/ {print $3}' | \
     xargs -i{} umount -lf {}
 zpool export -a

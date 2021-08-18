@@ -39,7 +39,7 @@ innodb_doublewrite = 0
 innodb_checksum_algorithm = none  
   
 relay_log=/var/lib/mysql-log/relay-bin  
-Disabling symbolic-links is recommended to prevent assorted security risks  
+
 symbolic-links=0  
 
 innodb_log_write_ahead_size = 16384  

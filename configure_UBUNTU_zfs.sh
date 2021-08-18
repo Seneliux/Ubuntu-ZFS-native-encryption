@@ -32,8 +32,8 @@ wget https://raw.githubusercontent.com/Seneliux/Ubuntu-ZFS-native-encryption/mas
 wget https://raw.githubusercontent.com/Seneliux/Ubuntu-ZFS-native-encryption/master/scripts/crypt_unlock -O /usr/share/initramfs-tools/hooks/crypt_unlock
 update-initramfs -k all -c
 
-#/etc/default/grub
-# Add init_on_alloc=0  to: GRUB_CMDLINE_LINUX_DEFAULT. Addtional - to disable ipv6: ipv6.disable=1
+#nano /etc/default/grub
+# Add init_on_alloc=0  to: GRUB_CMDLINE_LINUX. Addtional - to disable ipv6: ipv6.disable=1
 #remove "splash"
 # change "hidden" to "menu": GRUB_TIMEOUT_STYLE=menu
 # change GRUB_TIMEOUT=0 to 5.

@@ -24,29 +24,29 @@ mv /sql-data/* /var/lib/mysql/mysql-data
 chown mysql:mysql -R /var/lib/mysql
 chown root:root /var/lib/mysql/mysql-data/{mysql_upgrade_info,*.flag}
 ~~~
-edit /etc/mysql/mariadb.conf.d/50-server.cnf
+edit /etc/mysql/mariadb.conf.d/50-server.cnf  
 change values;
-log_error = /var/lib/mysql/mysql-log/error.log
-server-id = 1
-log_bin = /var/lib/mysql/mysql-log/binlog
-slow_query_log_file = /var/lib/mysql-log/slow.log
-datadir = /var/lib/mysql/mysql-data
+log_error = /var/lib/mysql/mysql-log/error.log  
+server-id = 1  
+log_bin = /var/lib/mysql/mysql-log/binlog  
+slow_query_log_file = /var/lib/mysql-log/slow.log  
+datadir = /var/lib/mysql/mysql-data  
+  
 
+ADD these new lines to [mysqld]:  
+innodb_log_group_home_dir = /var/lib/mysql/mysql-log  
+innodb_doublewrite = 0  
+innodb_checksum_algorithm = none  
+  
+relay_log=/var/lib/mysql-log/relay-bin  
+Disabling symbolic-links is recommended to prevent assorted security risks  
+symbolic-links=0  
 
-ADD these new lines to [mysqld]:
-innodb_log_group_home_dir = /var/lib/mysql/mysql-log
-innodb_doublewrite = 0
-innodb_checksum_algorithm = none
-
-relay_log=/var/lib/mysql-log/relay-bin
-Disabling symbolic-links is recommended to prevent assorted security risks
-symbolic-links=0
-
-innodb_log_write_ahead_size = 16384
-innodb_use_native_aio = 0
-innodb_use_atomic_writes = 0
-aria-log-dir-path = /var/lib/mysql/mysql-log
-log_warnings = 3
+innodb_log_write_ahead_size = 16384  
+innodb_use_native_aio = 0  
+innodb_use_atomic_writes = 0  
+aria-log-dir-path = /var/lib/mysql/mysql-log  
+log_warnings = 3  
 
 Securing:
 https://www.digitalocean.com/community/tutorials/how-to-install-mariadb-on-ubuntu-20-04

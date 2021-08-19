@@ -1,4 +1,4 @@
-# Ubuntu server on ZFS, encrypted /root
+# Ubuntu server on ZFS, encrypted /root, remote unlock
 
 WARNNG: DO NOT BLINDLY COPY ALL! Do it line by line.
 

@@ -50,12 +50,13 @@ ln -s /usr/lib/zfs-linux/zed.d/history_event-zfs-list-cacher.sh /etc/zfs/zed.d
 # After this wait a little bit
 zed -F &
 
-# Must be not empty
+sed -Ei "s|/mnt/?|/|" /etc/zfs/zfs-list.cache/bpool
+sed -Ei "s|/mnt/?|/|" /etc/zfs/zfs-list.cache/rpool
+
+# Must be not empty. If empty, consult at OpenZFS docs.
 cat /etc/zfs/zfs-list.cache/bpool
 cat /etc/zfs/zfs-list.cache/rpool
 
-sed -Ei "s|/mnt/?|/|" /etc/zfs/zfs-list.cache/bpool
-sed -Ei "s|/mnt/?|/|" /etc/zfs/zfs-list.cache/rpool
 
 
 passwd -l root # or passwd if have not copet SSH authorized_keys

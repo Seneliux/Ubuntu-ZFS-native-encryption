@@ -30,6 +30,8 @@ echo 'ssh-rsa AAAAB THERE IS YOUR RSA PUBLIC KEY FOR SYSTEM UNLOCKING VIA SSH' >
 chmod 600 /etc/dropbear-initramfs/authorized_keys
 wget https://raw.githubusercontent.com/Seneliux/Ubuntu-ZFS-native-encryption/master/scripts/unlock -O /usr/share/cryptsetup/initramfs/bin/unlock
 wget https://raw.githubusercontent.com/Seneliux/Ubuntu-ZFS-native-encryption/master/scripts/crypt_unlock -O /usr/share/initramfs-tools/hooks/crypt_unlock
+chmod +x /usr/share/cryptsetup/initramfs/bin/unlock
+chmod +x /usr/share/initramfs-tools/hooks/crypt_unlock
 update-initramfs -k all -c
 
 #nano /etc/default/grub

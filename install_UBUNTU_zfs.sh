@@ -7,7 +7,9 @@ wipefs --all -f $DISK
 sgdisk --zap-all $DISK
 sgdisk -n1:1M:+512M -t1:EF00 $DISK
 sgdisk -a1 -n5:24K:+1000K -t5:EF02 $DISK
-sgdisk -n3:0:+2G -t3:BE00 $DISK
+# 2G for boot partition if only use zsys. 
+#sgdisk -n3:0:+2G -t3:BE00 $DISK
+sgdisk -n3:0:+768M -t3:BE00 $DISK
 sgdisk -n4:0:0 -t4:BF00 $DISK
 partprobe
 

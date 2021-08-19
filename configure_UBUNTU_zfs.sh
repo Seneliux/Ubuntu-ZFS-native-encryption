@@ -16,7 +16,7 @@ mkdir /boot/efi/grub /boot/grub
 echo /boot/efi/grub /boot/grub none defaults,bind 0 0 >> /etc/fstab
 mount /boot/grub
 
-apt install --yes grub-pc linux-image-generic zfs-initramfs zsys
+apt install --yes grub-pc linux-image-generic zfs-initramfs
 apt remove --purge os-prober -y
 
 cp /usr/share/systemd/tmp.mount /etc/systemd/system/

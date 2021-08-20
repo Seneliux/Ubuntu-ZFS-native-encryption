@@ -23,6 +23,8 @@ mv /sql-data/* /var/lib/mysql/mysql-data
 
 chown mysql:mysql -R /var/lib/mysql
 chown root:root /var/lib/mysql/mysql-data/{mysql_upgrade_info,*.flag}
+
+ rm  /{sql-log,sql-data} -r
 ~~~
 edit /etc/mysql/mariadb.conf.d/50-server.cnf  
 change values;

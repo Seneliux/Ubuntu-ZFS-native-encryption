@@ -59,7 +59,6 @@ zfs create -o mountpoint=/boot bpool/BOOT/$UUID
 zfs create -o com.ubuntu.zsys:bootfs=no -o canmount=off rpool/ROOT/seniux/usr
 zfs create -o com.ubuntu.zsys:bootfs=no -o canmount=off rpool/ROOT/$UUID/var
 zfs create rpool/ROOT/$UUID/var/log
-zfs create rpool/ROOT/$UUID/var/snap
 zfs create rpool/ROOT/$UUID/var/spool
 zfs create -o com.sun:auto-snapshot=false rpool/ROOT/$UUID/var/cache
 

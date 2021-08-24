@@ -94,8 +94,8 @@ cp /etc/zfs/zpool.cache /mnt/etc/zfs/
 HOSTNAME=
 echo $HOSTNAME > /mnt/etc/hostname
 #remove FQDN from the second line if you have not FQDN
-echo -e '127.0.0.1\tlocalhost $HOSTNAME
-127.0.1.1\tFQDN $HOSTNAME' > /mnt/etc/hosts
+echo "127.0.0.1 localhost $HOSTNAME
+127.0.1.1 FQDN $HOSTNAME" > /mnt/etc/hosts
 
 echo 'deb http://de.archive.ubuntu.com/ubuntu focal main restricted universe multiverse
 deb http://de.archive.ubuntu.com/ubuntu focal-updates main restricted universe multiverse

@@ -35,7 +35,7 @@ chmod +x /usr/share/initramfs-tools/hooks/crypt_unlock
 update-initramfs -k all -c
 
 #nano /etc/default/grub
-# Add init_on_alloc=0  to: GRUB_CMDLINE_LINUX. Addtional - to disable ipv6: ipv6.disable=1
+# Add init_on_alloc=0  to: GRUB_CMDLINE_LINUX. Addtional - to disable ipv6: ipv6.disable=1. Renaming inet names: net.ifnames=0 biosdevname=0
 #remove "splash"
 # change "hidden" to "menu": GRUB_TIMEOUT_STYLE=menu
 # change GRUB_TIMEOUT=0 to 5.

@@ -77,7 +77,10 @@ zfs create -o mountpoint=/usr/local rpool/USERDATA/usr_local
 zfs create -o mountpoint=/var/lib/mysql rpool/USERDATA/mysql
 zfs create -o recordsize=16k -o primarycache=metadata rpool/USERDATA/mysql/mysql-data
 zfs create rpool/USERDATA/mysql/mysql-log
-
+zfs create -o canmount=noauto -o mountpoint=/var/lib/postgresql rpool/USERDATA/postgresql
+zfs create -o recordsize=32k -o redundant_metadata=most rpool/USERDATA/postgresql/psql-data
+zfs create -o recordsize=64k -o redundant_metadata=most rpool/USERDATA/postgresql/psql-wal
+zfs create -o mountpoint=/etc/opendkim rpool/USERDATA/opendkim
 
 # install system
 mkdir /mnt/run

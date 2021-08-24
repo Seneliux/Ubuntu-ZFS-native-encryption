@@ -56,7 +56,7 @@ zfs create -o mountpoint=/ -o com.ubuntu.zsys:bootfs=yes -o com.ubuntu.zsys:last
 zfs create -o mountpoint=/boot bpool/BOOT/$UUID
 
 # Create datasets:
-zfs create -o com.ubuntu.zsys:bootfs=no -o canmount=off rpool/ROOT/seniux/usr
+zfs create -o com.ubuntu.zsys:bootfs=no -o canmount=off rpool/ROOT/$UUID/usr
 zfs create -o com.ubuntu.zsys:bootfs=no -o canmount=off rpool/ROOT/$UUID/var
 zfs create rpool/ROOT/$UUID/var/log
 zfs create rpool/ROOT/$UUID/var/spool
@@ -74,6 +74,10 @@ zfs create -o com.ubuntu.zsys:bootfs=no -o mountpoint=/etc/nginx rpool/USERDATA/
 zfs create -o mountpoint=/var/vmail rpool/USERDATA/vmail
 zfs create -o mountpoint=/var/www rpool/USERDATA/www
 zfs create -o mountpoint=/usr/local rpool/USERDATA/usr_local
+zfs create -o mountpoint=/var/lib/mysql rpool/USERDATA/mysql
+zfs create -o recordsize=16k -o primarycache=metadata rpool/USERDATA/mysql/mysql-data
+zfs create rpool/USERDATA/mysql/mysql-log
+
 
 # install system
 mkdir /mnt/run

@@ -25,7 +25,7 @@ systemctl enable tmp.mount
 grub-probe /boot
 apt install dropbear-initramfs -y
 #upload RSA autohorized key to /etc/dropbear/authorized_keys
-sed -i "s/#DROPBEAR_OPTIONS=/DROPBEAR_OPTIONS=\"-c \/bin\/unlock -p 4748 -s -j -k -I 60\"/" /etc/dropbear-initramfs/config
+sed -i "s/#DROPBEAR_OPTIONS=/DROPBEAR_OPTIONS=\"-c \/bin\/unlock -p 2222 -s -j -k -I 60\"/" /etc/dropbear-initramfs/config
 echo 'ssh-rsa AAAAB THERE IS YOUR RSA PUBLIC KEY FOR SYSTEM UNLOCKING VIA SSH' > /etc/dropbear-initramfs/authorized_keys
 chmod 600 /etc/dropbear-initramfs/authorized_keys
 wget https://raw.githubusercontent.com/Seneliux/Ubuntu-ZFS-native-encryption/master/scripts/unlock -O /usr/share/cryptsetup/initramfs/bin/unlock

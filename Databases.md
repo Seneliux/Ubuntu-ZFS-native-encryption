@@ -27,10 +27,10 @@ chown root:root /var/lib/mysql/mysql-data/{mysql_upgrade_info,*.flag}
  rm  /{sql-log,sql-data} -r
 ~~~
 edit /etc/mysql/mariadb.conf.d/50-server.cnf  
-change values;
-log_error = /var/lib/mysql/mysql-log/error.log  
+change values;  
+
 server-id = 1  
-log_bin = /var/lib/mysql/mysql-log/binlog  
+log_bin = /var/lib/mysql/mysql-log/log.bin 
 slow_query_log_file = /var/lib/mysql-log/slow.log  
 datadir = /var/lib/mysql/mysql-data  
   

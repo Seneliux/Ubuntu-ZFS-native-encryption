@@ -86,5 +86,5 @@ zfs create -o recordsize=32k -o redundant_metadata=most rpool/USERDATA/postgresq
 zfs create -o recordsize=64k -o redundant_metadata=most rpool/USERDATA/postgresql/psql-wal  
 
 su postgres  
-/usr/lib/postgresql/13/bin/initdb -D /var/lib/postgresql/psql-data -U postgres -X /var/lib/postgresql/psql-wal
+/usr/lib/postgresql/13/bin/initdb -D /var/lib/postgresql/psql-data -U postgres -X /var/lib/postgresql/psql-wal  
 pg_ctl -D /var/lib/postgresql/psql-data/ -l /var/lib/postgresql/start.log start  

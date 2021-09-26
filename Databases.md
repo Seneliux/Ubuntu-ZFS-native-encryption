@@ -59,32 +59,32 @@ https://www.digitalocean.com/community/tutorials/how-to-install-mariadb-on-ubunt
 
 POSTGRESQL
 
-For optimization, build from source :/ There is not other way. Or install default from ubunu source. It's not hurts.
-UPDATE: hurts compilation from source. Compiling without issues, but regresion tests failed. After some experiments found that can # change only one blocksize - data or wal. both - no. Event installation from repositories, I think is good to reduce zfs recordsize for data to 32k, for wal - 64 k.
+For optimization, build from source :/ There is not other way. Or install default from ubunu source. It's not hurts.  
+UPDATE: hurts compilation from source. Compiling without issues, but regresion tests failed. After some experiments found that can # change only one blocksize - data or wal. both - no. Event installation from repositories, I think is good to reduce zfs recordsize for data to 32k, for wal - 64 k.  
 
-PostgreSQL block size to 32k and WAL block size to 64k
-apt install build-essential zlib1g-dev libreadline6-dev
-OPTIMAL: for systemd support apt install libsystemd-dev
-for nls (native language support, others than english) apt install gettext
+PostgreSQL block size to 32k and WAL block size to 64k  
+apt install build-essential zlib1g-dev libreadline6-dev  
+OPTIMAL: for systemd support apt install libsystemd-dev  
+for nls (native language support, others than english) apt install gettext  
 
-cd
-wget https://ftp.postgresql.org/pub/source/v13.4/postgresql-13.4.tar.gz
-tar xf v13.4/postgresql-13.4.tar.gz
-cd postgresql-13.4
-add languages or remove --enable-nls='de lt'
+cd  
+wget https://ftp.postgresql.org/pub/source/v13.4/postgresql-13.4.tar.gz  
+tar xf v13.4/postgresql-13.4.tar.gz  
+cd postgresql-13.4  
+add languages or remove --enable-nls='de lt'  
 
-./configure --prefix=/usr/local --exec-prefix=/usr/local --with-blocksize=32 --with-wal-blocksize=64 --with-systemd --enable-nls='de lt' --with-llvm
+./configure --prefix=/usr/local --exec-prefix=/usr/local --with-blocksize=32 --with-wal-blocksize=64 --with-systemd --enable-nls='de lt' --with-llvm  
 
-this will make and additional modules (contrib). Without contrib, remove world-bin
-make world-bin
+this will make and additional modules (contrib). Without contrib, remove world-bin  
+make world-bin  
 
-make check
+make check  
+  
 
+zfs create -o canmount=noauto -o mountpoint=/var/lib/postgresql rpool/USERDATA/postgresql  
+zfs create -o recordsize=32k -o redundant_metadata=most rpool/USERDATA/postgresql/psql-data  
+zfs create -o recordsize=64k -o redundant_metadata=most rpool/USERDATA/postgresql/psql-wal  
 
-zfs create -o canmount=noauto -o mountpoint=/var/lib/postgresql rpool/USERDATA/postgresql
-zfs create -o recordsize=32k -o redundant_metadata=most rpool/USERDATA/postgresql/psql-data
-zfs create -o recordsize=64k -o redundant_metadata=most rpool/USERDATA/postgresql/psql-wal
-
-su postgres
-initdb -D /var/lib/postgresql/psql-data -U postgres -X /var/lib/postgresql/psql-wal
-pg_ctl -D /var/lib/postgresql/psql-data/ -l /var/lib/postgresql/start.log start
+su postgres  
+/usr/lib/postgresql/13/bin/initdb -D /var/lib/postgresql/psql-data -U postgres -X /var/lib/postgresql/psql-wal
+pg_ctl -D /var/lib/postgresql/psql-data/ -l /var/lib/postgresql/start.log start  

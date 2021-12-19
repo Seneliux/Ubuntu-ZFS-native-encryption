@@ -1,5 +1,3 @@
-echo 'deb http://deb.debian.org/debian buster-backports main' > /etc/apt/sources.list.d/buster-backports.list
-apt update
 # disk formating
 apt install --yes -t buster-backports debootstrap
 systemctl stop zed

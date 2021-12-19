@@ -1,7 +1,7 @@
 apt update
 netplan generate
 # change your locales, time zone, etc
-echo -e 'de_DE.UTF-8 UTF-8\nen_US.UTF-8 UTF-8\nlt_LT.UTF-8 UTF-8' > /etc/locale.gen
+echo -e 'de_DE.UTF-8 UTF-8\nen_US.UTF-8 UTF-8\nlt_LT.UTF-8 UTF-8\nru_RU.UTF-8 UTF-8' > /etc/locale.gen
 locale-gen
 ln -s /usr/share/zoneinfo/Europe/Berlin /etc/localtime -f
 update-locale LANG=en_US.UTF-8 LANGUAGE=en_US

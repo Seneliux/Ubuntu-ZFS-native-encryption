@@ -27,9 +27,9 @@ zpool create \
 -o feature@filesystem_limits=enabled \
 -o feature@hole_birth=enabled \
 -o feature@large_blocks=enabled \
--o feature@zstd_compress=enabled \
+-o feature@lz4_compress=enabled \
 -o feature@spacemap_histogram=enabled \
--O acltype=posixacl -O canmount=off -O compression=zstd \
+-O acltype=posixacl -O canmount=off -O compression=lz4 \
 -O devices=off -O normalization=formD -O atime=off -O xattr=sa \
 -O mountpoint=/boot -R /mnt \
 bpool ${DISK}-part3

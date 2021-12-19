@@ -42,7 +42,7 @@ zpool create \
 -o feature@log_spacemap=disabled \
 -O encryption=aes-256-gcm \
 -O keylocation=prompt -O keyformat=passphrase \
--O acltype=posixacl -O canmount=off -O compression=zstd \
+-O acltype=posixacl -O canmount=off -O compression=lz4 \
 -O dnodesize=auto -O normalization=formD -O atime=off \
 -O xattr=sa -O mountpoint=/ -R /mnt \
 rpool ${DISK}-part4

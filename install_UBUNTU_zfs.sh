@@ -97,7 +97,7 @@ HOSTNAME=
 echo $HOSTNAME > /mnt/etc/hostname
 #remove FQDN from the second line if you have not FQDN
 echo "127.0.0.1 localhost $HOSTNAME
-127.0.1.1 FQDN $HOSTNAME" > /mnt/etc/hosts
+127.0.1.1 $HOSTNAME" >> /mnt/etc/hosts
 
 echo 'deb http://de.archive.ubuntu.com/ubuntu focal main restricted universe multiverse
 deb http://de.archive.ubuntu.com/ubuntu focal-updates main restricted universe multiverse

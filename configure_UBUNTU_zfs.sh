@@ -57,7 +57,7 @@ sed -Ei "s|/mnt/?|/|" /etc/zfs/zfs-list.cache/rpool
 cat /etc/zfs/zfs-list.cache/bpool
 cat /etc/zfs/zfs-list.cache/rpool
 
-
+# enter fg and then Ctrc+C
 
 passwd -l root # or passwd if have not copet SSH authorized_keys
 #set port, root login permissions, etc:

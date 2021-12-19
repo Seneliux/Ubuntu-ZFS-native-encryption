@@ -27,9 +27,9 @@ zpool create \
 -o feature@filesystem_limits=enabled \
 -o feature@hole_birth=enabled \
 -o feature@large_blocks=enabled \
--o feature@lz4_compress=enabled \
+-o feature@zstd_compress=enabled \
 -o feature@spacemap_histogram=enabled \
--O acltype=posixacl -O canmount=off -O compression=lz4 \
+-O acltype=posixacl -O canmount=off -O compression=zstd \
 -O devices=off -O normalization=formD -O atime=off -O xattr=sa \
 -O mountpoint=/boot -R /mnt \
 bpool ${DISK}-part3
@@ -40,7 +40,7 @@ zpool create \
 -o feature@log_spacemap=disabled \
 -O encryption=aes-256-gcm \
 -O keylocation=prompt -O keyformat=passphrase \
--O acltype=posixacl -O canmount=off -O compression=lz4 \
+-O acltype=posixacl -O canmount=off -O compression=zstd \
 -O dnodesize=auto -O normalization=formD -O atime=off \
 -O xattr=sa -O mountpoint=/ -R /mnt \
 rpool ${DISK}-part4
